@@ -155,7 +155,14 @@ public class SwiftAudioplayersDarwinPlugin: NSObject, FlutterPlugin {
         if method == "pause" {
             player.pause()
         } else if method == "resume" {
+          do {
+            let share = AVAudioSession.sharedInstance()
+            try share.setActive(true)
+            try share.setCategory(.soloAmbient)
             player.resume()
+          } catch {
+            print("play audio \(error)")
+          }
         } else if method == "resumeBack" {
           do {
             let share = AVAudioSession.sharedInstance()
