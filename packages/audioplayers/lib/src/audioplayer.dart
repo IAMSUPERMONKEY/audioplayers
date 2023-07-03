@@ -163,6 +163,7 @@ class AudioPlayer {
     AudioContext? ctx,
     Duration? position,
     PlayerMode? mode,
+        bool playBack = false,
   }) async {
     if (mode != null) {
       await setPlayerMode(mode);
@@ -180,7 +181,7 @@ class AudioPlayer {
       await seek(position);
     }
     await setSource(source);
-    return resume();
+    return resume(playBack);
   }
 
   Future<void> setAudioContext(AudioContext ctx) async {
@@ -215,9 +216,13 @@ class AudioPlayer {
   }
 
   /// Resumes the audio that has been paused or stopped.
-  Future<void> resume() async {
+  Future<void> resume([bool playBack = false]) async {
     await creatingCompleter.future;
-    await _platform.resume(playerId);
+    if(playBack) {
+      await _platform.resumeBack(playerId);
+    } else {
+      await _platform.resume(playerId);
+    }
     state = PlayerState.playing;
   }
 

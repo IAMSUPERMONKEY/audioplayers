@@ -56,6 +56,9 @@ abstract class MethodChannelAudioplayersPlatformInterface {
   /// Resumes the audio that has been paused or stopped.
   Future<void> resume(String playerId);
 
+  /// Support iOS, play audio background Resumes the audio that has been paused or stopped.
+  Future<void> resumeBack(String playerId);
+
   /// Releases the resources associated with this media player.
   ///
   /// The resources are going to be fetched or buffered again as needed.

@@ -55,6 +55,11 @@ mixin MethodChannelAudioplayersPlatform
   }
 
   @override
+  Future<void> resumeBack(String playerId) {
+    return _call('resumeBack', playerId);
+  }
+
+  @override
   Future<void> seek(String playerId, Duration position) {
     return _call(
       'seek',
